@@ -1,0 +1,62 @@
+@model YallaEat.Models.Restaurant
+
+@{
+    ViewData["Title"] = "Add Restaurant";
+}
+
+<div class="container mt-5 pt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card border-0 shadow-sm rounded-4">
+                <div class="card-body p-5">
+                    <h2 class="fw-bold mb-4">Add a New Restaurant</h2>
+                    
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                        
+                        <div class="mb-4">
+                            <label asp-for="Name" class="form-label fw-semibold">Restaurant Name</label>
+                            <input asp-for="Name" class="form-control form-control-lg bg-light" placeholder="e.g. The Golden Grill" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="Description" class="form-label fw-semibold">Description</label>
+                            <textarea asp-for="Description" class="form-control bg-light" rows="3" placeholder="Tell customers what makes your food special..."></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <label asp-for="City" class="form-label fw-semibold">City</label>
+                                <input asp-for="City" class="form-control bg-light" placeholder="e.g. Cairo" />
+                                <span asp-validation-for="City" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <label asp-for="Address" class="form-label fw-semibold">Address / Street</label>
+                                <input asp-for="Address" class="form-control bg-light" placeholder="e.g. 15 Maadi St." />
+                                <span asp-validation-for="Address" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="ImageUrl" class="form-label fw-semibold">Cover Image URL</label>
+                            <input asp-for="ImageUrl" class="form-control bg-light" placeholder="https://..." />
+                            <div class="form-text">Paste a direct link to an image of your restaurant.</div>
+                            <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-flex gap-3 mt-5">
+                            <button type="submit" class="btn btn-primary btn-lg px-5">Save Restaurant</button>
+                            <a asp-action="Dashboard" class="btn btn-light btn-lg">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

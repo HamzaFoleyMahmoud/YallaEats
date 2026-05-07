@@ -1,0 +1,90 @@
+@model IEnumerable<YallaEat.Models.ViewModels.SalesPerformanceViewModel>
+
+@{
+    ViewData["Title"] = "Sales Analytics";
+    int rank = 1;
+}
+
+<div class="container mt-5 pt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold">
+            <i class="fa-solid fa-chart-line text-primary me-2"></i>
+            @(ViewBag.RestaurantName != null ? $"Sales Analytics: {ViewBag.RestaurantName}" : "Global Sales Analytics")
+        </h2>
+        <a asp-action="Index" class="btn btn-outline-secondary rounded-pill">Back to Dashboard</a>
+    </div>
+
+    <div class="row g-4 mb-5">
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm rounded-4 p-4 text-center">
+                <h6 class="text-muted mb-2 text-uppercase small fw-bold">Total Items Sold</h6>
+                <h2 class="fw-bold text-primary mb-0">@Model.Sum(x => x.TotalSold)</h2>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm rounded-4 p-4 text-center">
+                <h6 class="text-muted mb-2 text-uppercase small fw-bold">Total Revenue</h6>
+                <h2 class="fw-bold text-success mb-0">$@Model.Sum(x => x.TotalRevenue).ToString("0.00")</h2>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm rounded-4 p-4 text-center">
+                <h6 class="text-muted mb-2 text-uppercase small fw-bold">Top Selling Item</h6>
+                <h2 class="fw-bold text-dark mb-0">@(Model.FirstOrDefault()?.ItemName ?? "N/A")</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="bg-light">
+                    <tr>
+                        <th class="px-4">Rank</th>
+                        <th>Item</th>
+                        <th>Quantity Sold</th>
+                        <th>Revenue</th>
+                        <th class="text-end px-4">Performance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="px-4 py-3">
+                                @if (rank == 1)
+                                {
+                                    <span class="badge bg-warning text-dark rounded-pill px-3"><i class="fa-solid fa-crown me-1"></i> #1 Best Seller</span>
+                                }
+                                else
+                                {
+                                    <span class="fw-bold text-muted">#@rank</span>
+                                }
+                            </td>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <img src="@item.ImageUrl" class="rounded me-3" style="width: 40px; height: 40px; object-fit: cover;" onerror="this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=100'"/>
+                                    <span class="fw-bold">@item.ItemName</span>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="badge bg-primary-subtle text-primary border border-primary px-3 rounded-pill">@item.TotalSold sold</span>
+                            </td>
+                            <td class="fw-bold">$@item.TotalRevenue.ToString("0.00")</td>
+                            <td class="text-end px-4">
+                                @{
+                                    var maxSold = Model.Max(x => x.TotalSold);
+                                    var percentage = maxSold > 0 ? (double)item.TotalSold / maxSold * 100 : 0;
+                                }
+                                <div class="progress rounded-pill" style="height: 8px; width: 100px; margin-left: auto;">
+                                    <div class="progress-bar bg-primary" role="progressbar" style="width: @percentage%"></div>
+                                </div>
+                            </td>
+                        </tr>
+                        rank++;
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

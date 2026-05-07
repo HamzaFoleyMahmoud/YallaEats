@@ -1,0 +1,112 @@
+@model IEnumerable<YallaEat.Models.CartItem>
+
+@{
+    ViewData["Title"] = "Your Shopping Cart";
+    decimal total = Model.Sum(i => i.Quantity * (i.MenuItem?.Price ?? 0));
+}
+
+<div class="container my-5 pt-5">
+    <h1 class="fw-bold mb-4"><i class="fa-solid fa-cart-shopping text-primary me-2"></i>Your Shopping Cart</h1>
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card border-0 shadow-sm rounded-4 overflow-hidden mb-4">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="bg-light">
+                                <tr>
+                                    <th class="px-4">Product</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Subtotal</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td class="px-4 py-3">
+                                            <div class="d-flex align-items-center">
+                                                @if (!string.IsNullOrEmpty(item.MenuItem?.ImageUrl))
+                                                {
+                                                    <img src="@item.MenuItem.ImageUrl" class="rounded-3 me-3" style="width: 60px; height: 60px; object-fit: cover;">
+                                                }
+                                                else
+                                                {
+                                                    <div class="rounded-3 me-3 bg-light d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                                                        <i class="fa-solid fa-utensils text-muted"></i>
+                                                    </div>
+                                                }
+                                                <div>
+                                                    <h6 class="mb-0 fw-bold">@item.MenuItem?.Name</h6>
+                                                    <small class="text-muted">@item.MenuItem?.Restaurant?.Name</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>$@item.MenuItem?.Price.ToString("0.00")</td>
+                                        <td>
+                                            <span class="badge bg-light text-dark border px-3 py-2 fs-6">@item.Quantity</span>
+                                        </td>
+                                        <td class="fw-bold text-primary">$@((item.Quantity * (item.MenuItem?.Price ?? 0)).ToString("0.00"))</td>
+                                        <td class="text-end px-4">
+                                            <form asp-action="RemoveFromCart" method="post">
+                                                <input type="hidden" name="id" value="@item.Id" />
+                                                <button type="submit" class="btn btn-link text-danger p-0"><i class="fa-solid fa-trash-can"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary rounded-pill px-4">
+                    <i class="fa-solid fa-arrow-left me-2"></i>Continue Browsing
+                </a>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-sm rounded-4 p-4 sticky-top" style="top: 100px;">
+                    <h4 class="fw-bold mb-4">Order Summary</h4>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="text-muted">Subtotal</span>
+                        <span class="fw-semibold">$@total.ToString("0.00")</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="text-muted">Delivery Fee</span>
+                        <span class="text-success fw-semibold">FREE</span>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between mb-4">
+                        <h5 class="fw-bold">Total</h5>
+                        <h5 class="fw-bold text-primary">$@total.ToString("0.00")</h5>
+                    </div>
+
+                    <a asp-action="Checkout" class="btn btn-primary w-100 rounded-pill py-3 fw-bold shadow-sm">
+                        Proceed to Checkout<i class="fa-solid fa-chevron-right ms-2"></i>
+                    </a>
+                    
+                    <div class="mt-4 text-center">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" height="20" class="me-3 opacity-50">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" height="15" class="me-3 opacity-50">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" height="20" class="opacity-50">
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="text-center py-5">
+            <div class="mb-4">
+                <i class="fa-solid fa-cart-arrow-down fa-5x text-muted opacity-25"></i>
+            </div>
+            <h2 class="fw-bold">Your cart is empty</h2>
+            <p class="text-muted mb-4">Looks like you haven't added anything to your cart yet.</p>
+            <a asp-controller="Home" asp-action="Index" class="btn btn-primary rounded-pill px-5 py-2">Start Exploring</a>
+        </div>
+    }
+</div>

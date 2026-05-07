@@ -1,0 +1,57 @@
+@model IEnumerable<YallaEat.Models.Order>
+
+@{
+    ViewData["Title"] = "My Orders";
+}
+
+<div class="container my-5 pt-5">
+    <h1 class="fw-bold mb-4"><i class="fa-solid fa-clock-history text-primary me-2"></i>My Order History</h1>
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="bg-light">
+                        <tr>
+                            <th class="px-4">Order #</th>
+                            <th>Date</th>
+                            <th>Total Amount</th>
+                            <th>Status</th>
+                            <th class="text-end px-4">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var order in Model)
+                        {
+                            <tr>
+                                <td class="px-4 py-3 fw-bold">#@order.Id</td>
+                                <td>@order.OrderDate.ToString("MMM dd, yyyy HH:mm")</td>
+                                <td class="fw-bold text-primary">$@order.TotalAmount.ToString("0.00")</td>
+                                <td>
+                                    <span class="badge @(order.Status == "Delivered" ? "bg-success" : "bg-primary") rounded-pill px-3">
+                                        @order.Status
+                                    </span>
+                                </td>
+                                <td class="text-end px-4">
+                                    <a asp-action="Details" asp-route-id="@order.Id" class="btn btn-sm btn-outline-primary rounded-pill px-4">View Details</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="text-center py-5">
+            <div class="mb-4">
+                <i class="fa-solid fa-box-open fa-5x text-muted opacity-25"></i>
+            </div>
+            <h2 class="fw-bold">No orders yet</h2>
+            <p class="text-muted mb-4">You haven't placed any orders. Start exploring our restaurants!</p>
+            <a asp-controller="Home" asp-action="Index" class="btn btn-primary rounded-pill px-5 py-2">Find Food</a>
+        </div>
+    }
+</div>

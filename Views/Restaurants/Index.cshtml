@@ -1,0 +1,67 @@
+@model IEnumerable<YallaEat.Models.Restaurant>
+
+@{
+    ViewData["Title"] = "My Dashboard";
+}
+
+<div class="container mt-5 pt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="fa-solid fa-store text-primary me-2"></i>My Restaurant Dashboard</h2>
+        <div class="d-flex gap-2">
+            <a asp-action="SalesAnalytics" class="btn btn-outline-success rounded-pill px-4"><i class="fa-solid fa-chart-line me-2"></i>Analytics</a>
+            <a asp-action="Orders" class="btn btn-outline-primary rounded-pill px-4"><i class="fa-solid fa-receipt me-2"></i>View Orders</a>
+            <a asp-action="Create" class="btn btn-primary rounded-pill px-4"><i class="fa-solid fa-plus me-2"></i>Add New Restaurant</a>
+        </div>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info shadow-sm border-0 rounded-3">
+            <i class="fa-solid fa-circle-info me-2"></i>You don't have any restaurants yet. Click "Add New Restaurant" to get started!
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive shadow-sm rounded-3">
+            <table class="table table-hover table-white mb-0 align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>Restaurant</th>
+                        <th>Location</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <img src="@item.ImageUrl" class="rounded me-3" style="width: 50px; height: 50px; object-fit: cover;" alt="@item.Name" onerror="this.src='https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=100'"/>
+                                    <div>
+                                        <h6 class="mb-0 fw-bold">@item.Name</h6>
+                                        <small class="text-muted text-truncate d-inline-block" style="max-width: 250px;">@item.Description</small>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div>@item.City</div>
+                                <small class="text-muted">@item.Address</small>
+                            </td>
+                            <td>
+                                <div class="d-flex gap-2">
+                                    <a asp-action="ManageMenu" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary" title="Manage Menu"><i class="fa-solid fa-list-check"></i> Menu</a>
+                                    <a asp-action="SalesAnalytics" asp-route-id="@item.Id" class="btn btn-sm btn-outline-success" title="View Analytics"><i class="fa-solid fa-chart-simple"></i> Analytics</a>
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary" title="Edit Restaurant"><i class="fa-solid fa-pen"></i> Edit</a>
+                                    <form asp-action="Delete" asp-route-id="@item.Id" method="post" onsubmit="return confirm('Are you sure you want to delete @item.Name? This will also delete all associated menu items and reviews.');">
+                                        <button type="submit" class="btn btn-sm btn-outline-danger"><i class="fa-solid fa-trash"></i> Delete</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>

@@ -1,0 +1,89 @@
+@model IEnumerable<YallaEat.Models.Order>
+
+@{
+    ViewData["Title"] = "Restaurant Orders";
+}
+
+<div class="container mt-5 pt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold"><i class="fa-solid fa-receipt text-primary me-2"></i>Incoming Orders</h2>
+        <a asp-action="Index" class="btn btn-outline-secondary rounded-pill">Back to Dashboard</a>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="text-center py-5 bg-light rounded-4">
+            <i class="fa-solid fa-inbox fa-3x text-muted mb-3"></i>
+            <h4 class="text-muted">No orders found for your restaurants.</h4>
+        </div>
+    }
+    else
+    {
+        <div class="row g-4">
+            @foreach (var order in Model)
+            {
+                <div class="col-12">
+                    <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+                        <div class="card-header bg-white border-bottom py-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="fw-bold fs-5">Order #@order.Id</span>
+                                    <span class="text-muted ms-2">@order.OrderDate.ToString("MMM dd, HH:mm")</span>
+                                </div>
+                                <div class="d-flex align-items-center gap-3">
+                                    <span class="badge @(order.Status == "Pending" ? "bg-warning text-dark" : "bg-success") rounded-pill px-3">
+                                        @order.Status
+                                    </span>
+                                    <form asp-action="UpdateOrderStatus" method="post" class="d-flex gap-2">
+                                        <input type="hidden" name="orderId" value="@order.Id" />
+                                        @if (order.Status == "Pending")
+                                        {
+                                            <button type="submit" name="status" value="Confirmed" class="btn btn-sm btn-primary rounded-pill px-3">Confirm</button>
+                                        }
+                                        else if (order.Status == "Confirmed")
+                                        {
+                                            <button type="submit" name="status" value="Preparing" class="btn btn-sm btn-info text-white rounded-pill px-3">Start Preparing</button>
+                                        }
+                                        else if (order.Status == "Preparing")
+                                        {
+                                            <button type="submit" name="status" value="Out for Delivery" class="btn btn-sm btn-warning text-dark rounded-pill px-3">Send for Delivery</button>
+                                        }
+                                        else if (order.Status == "Out for Delivery")
+                                        {
+                                            <button type="submit" name="status" value="Delivered" class="btn btn-sm btn-success rounded-pill px-3">Mark Delivered</button>
+                                        }
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6 class="fw-bold mb-2">Customer Info</h6>
+                                    <p class="mb-1"><i class="fa-solid fa-user me-2 text-muted"></i> @(order.User?.FirstName ?? "Unknown") @order.User?.LastName</p>
+                                    <p class="mb-0"><i class="fa-solid fa-location-dot me-2 text-muted"></i> @order.DeliveryAddress</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6 class="fw-bold mb-2">Items for Your Restaurants</h6>
+                                    <ul class="list-unstyled mb-0">
+                                        @foreach (var item in order.OrderItems)
+                                        {
+                                            <li class="d-flex justify-content-between mb-1">
+                                                <span>@item.Quantity x @item.MenuItem.Name (@item.MenuItem.Restaurant.Name)</span>
+                                                <span class="fw-bold">$@((item.Quantity * item.PriceAtTimeOfOrder).ToString("0.00"))</span>
+                                            </li>
+                                        }
+                                    </ul>
+                                    <div class="text-end mt-3 border-top pt-2">
+                                        <span class="text-muted me-2">Total Amount:</span>
+                                        <span class="fw-bold fs-5 text-primary">$@order.TotalAmount.ToString("0.00")</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

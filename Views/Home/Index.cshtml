@@ -1,0 +1,74 @@
+@model IEnumerable<YallaEat.Models.Restaurant>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container hero-content">
+        <h1 class="hero-title">Discover the Best Food in Your City</h1>
+        <p class="lead mb-5">Explore top-rated restaurants, browse menus, and order your favorite meals instantly.</p>
+        
+        <form asp-action="Index" method="get" class="search-box">
+            <i class="fa-solid fa-location-dot text-muted ms-3 mt-3"></i>
+            <input type="text" name="searchCity" class="form-control search-input" placeholder="Search for restaurants or cities..." />
+            <button type="submit" class="btn btn-primary px-4 ms-2">Search</button>
+        </form>
+    </div>
+</section>
+
+<!-- Restaurants Grid -->
+<div class="container mt-5 pt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold">Featured Restaurants</h2>
+        <a href="#" class="text-decoration-none text-primary fw-semibold">View all <i class="fa-solid fa-arrow-right ms-1"></i></a>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        @if (Model != null && Model.Any())
+        {
+            foreach (var restaurant in Model)
+            {
+                var averageRating = restaurant.Reviews != null && restaurant.Reviews.Any() 
+                    ? restaurant.Reviews.Average(r => r.Rating) 
+                    : 0;
+
+                <div class="col">
+                    <div class="card restaurant-card">
+                        <div class="restaurant-img-wrapper">
+                            @if (!string.IsNullOrEmpty(restaurant.ImageUrl))
+                            {
+                                <img src="@restaurant.ImageUrl" class="restaurant-img" alt="@restaurant.Name">
+                            }
+                            else
+                            {
+                                <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=2070&auto=format&fit=crop" class="restaurant-img" alt="Default Restaurant">
+                            }
+                            <div class="restaurant-badge">
+                                <i class="fa-solid fa-star star-rating"></i> @averageRating.ToString("0.0")
+                            </div>
+                        </div>
+                        <div class="card-body p-4">
+                            <h5 class="card-title fw-bold mb-1">@restaurant.Name</h5>
+                            <p class="text-muted small mb-3"><i class="fa-solid fa-map-pin me-1"></i> @restaurant.City, @restaurant.Address</p>
+                            <p class="card-text text-truncate">@restaurant.Description</p>
+                            <hr class="text-muted">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-light text-dark border"><i class="fa-solid fa-utensils me-1"></i> Restaurant</span>
+                                <a asp-controller="Restaurants" asp-action="Details" asp-route-id="@restaurant.Id" class="btn btn-outline-primary btn-sm rounded-pill px-3">View Menu</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12 text-center py-5">
+                <i class="fa-solid fa-store-slash fa-3x text-muted mb-3"></i>
+                <h4 class="text-muted">No restaurants found in this area.</h4>
+            </div>
+        }
+    </div>
+</div>

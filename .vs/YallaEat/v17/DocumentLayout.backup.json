@@ -1,0 +1,115 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\hamza\\YallaEat\\YallaEat\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{6E615844-1B0B-4124-B360-9EC1D268D577}|YallaEat.csproj|d:\\hamza\\yallaeat\\yallaeat\\areas\\identity\\pages\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6E615844-1B0B-4124-B360-9EC1D268D577}|YallaEat.csproj|solutionrelative:areas\\identity\\pages\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E615844-1B0B-4124-B360-9EC1D268D577}|YallaEat.csproj|d:\\hamza\\yallaeat\\yallaeat\\data\\migrations\\20260507205939_addorderingsystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E615844-1B0B-4124-B360-9EC1D268D577}|YallaEat.csproj|solutionrelative:data\\migrations\\20260507205939_addorderingsystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E615844-1B0B-4124-B360-9EC1D268D577}|YallaEat.csproj|d:\\hamza\\yallaeat\\yallaeat\\views\\orders\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6E615844-1B0B-4124-B360-9EC1D268D577}|YallaEat.csproj|solutionrelative:views\\orders\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E615844-1B0B-4124-B360-9EC1D268D577}|YallaEat.csproj|d:\\hamza\\yallaeat\\yallaeat\\controllers\\menuitemscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E615844-1B0B-4124-B360-9EC1D268D577}|YallaEat.csproj|solutionrelative:controllers\\menuitemscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E615844-1B0B-4124-B360-9EC1D268D577}|YallaEat.csproj|d:\\hamza\\yallaeat\\yallaeat\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E615844-1B0B-4124-B360-9EC1D268D577}|YallaEat.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "D:\\hamza\\YallaEat\\YallaEat\\Areas\\Identity\\Pages\\Account\\Login.cshtml",
+              "RelativeDocumentMoniker": "Areas\\Identity\\Pages\\Account\\Login.cshtml",
+              "ToolTip": "D:\\hamza\\YallaEat\\YallaEat\\Areas\\Identity\\Pages\\Account\\Login.cshtml",
+              "RelativeToolTip": "Areas\\Identity\\Pages\\Account\\Login.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-07T21:30:35.152Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "20260507205939_AddOrderingSystem.cs",
+              "DocumentMoniker": "D:\\hamza\\YallaEat\\YallaEat\\Data\\Migrations\\20260507205939_AddOrderingSystem.cs",
+              "RelativeDocumentMoniker": "Data\\Migrations\\20260507205939_AddOrderingSystem.cs",
+              "ToolTip": "D:\\hamza\\YallaEat\\YallaEat\\Data\\Migrations\\20260507205939_AddOrderingSystem.cs",
+              "RelativeToolTip": "Data\\Migrations\\20260507205939_AddOrderingSystem.cs",
+              "ViewState": "AgIAAHgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-07T20:59:40.135Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "D:\\hamza\\YallaEat\\YallaEat\\Views\\Orders\\Details.cshtml",
+              "RelativeDocumentMoniker": "Views\\Orders\\Details.cshtml",
+              "ToolTip": "D:\\hamza\\YallaEat\\YallaEat\\Views\\Orders\\Details.cshtml",
+              "RelativeToolTip": "Views\\Orders\\Details.cshtml",
+              "ViewState": "AgIAADQAAAAAAAAAAAAqwEIAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-07T20:54:33.351Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MenuItemsController.cs",
+              "DocumentMoniker": "D:\\hamza\\YallaEat\\YallaEat\\Controllers\\MenuItemsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\MenuItemsController.cs",
+              "ToolTip": "D:\\hamza\\YallaEat\\YallaEat\\Controllers\\MenuItemsController.cs",
+              "RelativeToolTip": "Controllers\\MenuItemsController.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAmwBIAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-07T19:29:04.256Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\hamza\\YallaEat\\YallaEat\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\hamza\\YallaEat\\YallaEat\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAD4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-07T18:08:52.813Z"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
